@@ -153,16 +153,33 @@ clear() {
         this.previousoperand = ''
         this.operand = undefined
     }
-    delete () {
+```
+First will be a simple clear(), fnunction, inside which we just add empty strings `''` to `currentoperand` and `previousoperand`. 
+
+
+Then, we move on to our next function. 
+```Javascript
+delete () {
         this.currentoperand = this.currentoperand.toString().slice(0,-1)
     }
+```
+In this function, we use `slice` to remove one of the characters from our `currentoperand`.
 
-    appendNumber (number) {
+
+
+After this, 
+```Javascript
+appendNumber (number) {
         if (number === '.' && this.currentoperand.includes('.')) return
         this.currentoperand = this.currentoperand.toString() + number.toString()
     }
+```
+We create the function `appendNumber` in which we use the `if` statement, to ensure that the decimal point `.` can only be used once in our `currentoperand`. After that we add add numbers to the `currentoperand` string.
 
-    chooseOperation(operation){ 
+
+In the next function:
+```Javascript
+chooseOperation(operation){ 
         if (this.currentoperand === '') return 
         if (this.previousoperand !== '') {
             this.compute()
@@ -170,44 +187,7 @@ clear() {
         this.operation = operation
         this.previousoperand = this.currentoperand
         this.currentoperand = ''
-
     }
-
-    compute () {
-        let computation 
-        const prev = parseFloat(this.previousoperand)
-        const current = parseFloat(this.currentoperand)
-        if (isNaN(prev) || isNaN(current)) return
-        switch (this.operation) {
-            case '+':
-                computation = prev + current
-                break
-            case '-':
-                computation = prev - current
-                break
-            case '*':
-                computation = prev * current
-                break
-            case '÷':
-                computation = prev / current
-                break
-            default: 
-                return
-        }
-    this.currentoperand = computation
-    this.operation= undefined
-    this.previousoperand = ''
-}
-    
-    updateDisplay() {
-        this.currentoperandTextElement.innerText = this.currentoperand
-        if (this.operation != null) {
-            this.previousoperandTextElement.innerText = 
-                `${this.previousoperand} ${this.operation}`
-        }   else { 
-            this.previousoperandTextElement.innerText = ''
-        } 
-    }   
-}
-
-```
+ ```
+ In this `choooseOperation` function, we use the `if` statement first to ensure that for any reason our `currentoperand` is empty then `return` and not do this function. Then we use the `if` statement again implying that, if our `previousoperand` operand is not empty, then we can use the function `compute()` which we haven't created as of now. 
+ 
