@@ -49,3 +49,165 @@
 </html>
 ```
 A simple HTML code to add all the necessary components for our calculator. We added all the buttons and also an output component. `class` or `data` is used where necessary, as this would make this easier to identify and call the components in our Javascript code.
+
+
+## CSS 
+Styled our HTML components into a simple calculator. 
+
+```CSS
+*, *::before,*::after {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-weight: normal;
+
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #00AAFF, #00FF6C);
+
+}
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4,100px);
+    grid-template-rows: minmax(120px,auto)repeat(5,100px);
+
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background: rgba(red, green, blue, .75) ;
+}
+.calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, .90);
+
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    grid-column: 1 / -1;
+    background-color: rgba(0, 0, 0, .75);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, .70);
+    font-size: 1.5rem;
+
+}
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
+    
+}
+```
+In the CSS, it begins with using `begin::` and `after::` selector along with the `*` which selects all the elements. We select the box-sizing and the font-weight and font-family for all the elements in our program. In the `body` element, we set the background color of our calculator and set the padding and margin to 0. Then we style the rest of the buttons and our calculator grid, so get a simple and minimalist design for our calculator. 
+
+## Javascript 
+Next, we move on to add the functionalities to our buttons in Javascript. 
+
+```Javascript 
+const numberButtons = document.querySelectorAll('[data-number]')
+const operationButtons = document.querySelectorAll('[data-operation]')
+const equalsButtons = document.querySelector('[data-equals]')
+const deleteButtons = document.querySelector('[data-del]')
+const allclearButtons = document.querySelector('[data-all-clear]')
+const previousoperandTextElement = document.querySelector('[data-previous-operand]')
+const currentoperandTextElement = document.querySelector('[data-current-operand]')
+```
+First we will declare, the const type variables. The variable values are the `data` values that we added to our HTML components.
+
+Then, 
+```Javascript
+class Calculator {
+    constructor(previousoperandTextElement, currentoperandTextElement) {
+        this.previousoperandTextElement = previousoperandTextElement
+        this.currentoperandTextElement = currentoperandTextElement
+        this.clear()
+```
+Then we create a class `Calculator`, The class has two initial properties: `previousoperandTextElement` and `currentoperandTextElement`. We also add a function `clear()` which will be created next, the clear function is added so that everytime the calculator is started, it starts with a clear output screen.
+
+
+
+Now, we start to creat different functions necessary inside our Class `Calculator`
+
+```Javascript
+clear() { 
+        this.currentoperand = ''
+        this.previousoperand = ''
+        this.operand = undefined
+    }
+    delete () {
+        this.currentoperand = this.currentoperand.toString().slice(0,-1)
+    }
+
+    appendNumber (number) {
+        if (number === '.' && this.currentoperand.includes('.')) return
+        this.currentoperand = this.currentoperand.toString() + number.toString()
+    }
+
+    chooseOperation(operation){ 
+        if (this.currentoperand === '') return 
+        if (this.previousoperand !== '') {
+            this.compute()
+        }
+        this.operation = operation
+        this.previousoperand = this.currentoperand
+        this.currentoperand = ''
+
+    }
+
+    compute () {
+        let computation 
+        const prev = parseFloat(this.previousoperand)
+        const current = parseFloat(this.currentoperand)
+        if (isNaN(prev) || isNaN(current)) return
+        switch (this.operation) {
+            case '+':
+                computation = prev + current
+                break
+            case '-':
+                computation = prev - current
+                break
+            case '*':
+                computation = prev * current
+                break
+            case '÷':
+                computation = prev / current
+                break
+            default: 
+                return
+        }
+    this.currentoperand = computation
+    this.operation= undefined
+    this.previousoperand = ''
+}
+    
+    updateDisplay() {
+        this.currentoperandTextElement.innerText = this.currentoperand
+        if (this.operation != null) {
+            this.previousoperandTextElement.innerText = 
+                `${this.previousoperand} ${this.operation}`
+        }   else { 
+            this.previousoperandTextElement.innerText = ''
+        } 
+    }   
+}
+
+```
