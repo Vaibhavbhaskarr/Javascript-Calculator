@@ -191,3 +191,33 @@ chooseOperation(operation){
  ```
  In this `choooseOperation` function, we use the `if` statement first to ensure that for any reason our `currentoperand` is empty then `return` and not do this function. Then we use the `if` statement again implying that, if our `previousoperand` operand is not empty, then we can use the function `compute()` which we haven't created as of now. 
  
+
+The next function:
+```Javascript
+compute () {
+        let computation 
+        const prev = parseFloat(this.previousoperand)
+        const current = parseFloat(this.currentoperand)
+        if (isNaN(prev) || isNaN(current)) return
+        switch (this.operation) {
+            case '+':
+                computation = prev + current
+                break
+            case '-':
+                computation = prev - current
+                break
+            case '*':
+                computation = prev * current
+                break
+            case '÷':
+                computation = prev / current
+                break
+            default: 
+                return
+        }
+    this.currentoperand = computation
+    this.operation= undefined
+    this.previousoperand = ''
+ ```
+ This function `compute` is the function where we compute the inputs of the user. In this the addition, subtraction, multiplication and division takes place. To start off we declare two variables `const prev` and `const current`, we assign the variables to  type parseFloat [The parseFloat function converts its first argument to a string, parses that string as a decimal number literal, then returns a number or NaN] and their value is the `previousoperand` and `currentoperand`. 
+ Then we use the `if` statement to ensure that if the prev or current isNAN then we `return` and not continue further. 
