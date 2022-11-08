@@ -48,4 +48,4 @@
 </body>
 </html>
 ```
-
+A simple HTML code to add all the necessary components for our calculator. We added all the buttons and also an output component. `class` or `data` is used where necessary, as this would make this easier to identify and call the components in our Javascript code.
