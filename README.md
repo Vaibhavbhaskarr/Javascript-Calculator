@@ -1,6 +1,6 @@
 # A simple calculator in Javascript
 
-## A calculator with all the basic mathematical computations
+## A calculator with all the basic mathematical computation
 
 1. index.html: -This file includes the html code for the program. and it links to "style.css" & "script.js".
 2. style.css: -Includes the formating or styling for our program.
