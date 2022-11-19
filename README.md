@@ -223,7 +223,7 @@ compute () {
  Then we use the `if` statement to ensure that if the prev or current isNAN then we `return` and not continue further. 
 If all of our previous parameters and conditions are met then we continue with the `switch` function under which we have different cases for different mathematical operations. 
 
-
+Next will be our function to update the display whenever we key in numbers or perform computations.
 ```Javascript
  updateDisplay() {
         this.currentoperandTextElement.innerText = this.currentoperand
