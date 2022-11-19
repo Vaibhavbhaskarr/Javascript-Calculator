@@ -221,3 +221,4 @@ compute () {
  ```
  This function `compute` is the function where we compute the inputs of the user. In this the addition, subtraction, multiplication and division takes place. To start off we declare two variables `const prev` and `const current`, we assign the variables to  type parseFloat [The parseFloat function converts its first argument to a string, parses that string as a decimal number literal, then returns a number or NaN] and their value is the `previousoperand` and `currentoperand`. 
  Then we use the `if` statement to ensure that if the prev or current isNAN then we `return` and not continue further. 
+If all of our previous parameters and conditions are met then we continue with the `switch` function under which we have different cases for different mathematical operations. 
