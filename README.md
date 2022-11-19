@@ -222,3 +222,18 @@ compute () {
  This function `compute` is the function where we compute the inputs of the user. In this the addition, subtraction, multiplication and division takes place. To start off we declare two variables `const prev` and `const current`, we assign the variables to  type parseFloat [The parseFloat function converts its first argument to a string, parses that string as a decimal number literal, then returns a number or NaN] and their value is the `previousoperand` and `currentoperand`. 
  Then we use the `if` statement to ensure that if the prev or current isNAN then we `return` and not continue further. 
 If all of our previous parameters and conditions are met then we continue with the `switch` function under which we have different cases for different mathematical operations. 
+
+
+```Javascript
+ updateDisplay() {
+        this.currentoperandTextElement.innerText = this.currentoperand
+        if (this.operation != null) {
+            this.previousoperandTextElement.innerText = 
+                `${this.previousoperand} ${this.operation}`
+        }   else { 
+            this.previousoperandTextElement.innerText = ''
+        } 
+    }   
+}
+```
+Then we need a function `updateDisplay` which we will be using to update our display screen. First we set the `this.currentoperandTextElement.innerText` to `this.currentoperand`, this makes the inner text of our display to be the current operand. After this we use `if` with a condition that, the operation should not be null. When the condition is met the previous element's inner text, becomes equal to the previous operand and the operation pressed. Anything else would leave it to be an empty string.
